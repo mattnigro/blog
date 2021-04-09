@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='css/bootstrap.min.css'>
+    <script src='js/jquery-min.js'></script>
+    <title>Simply Blogging</title>
+</head>
+<body>
+<script>
+    $(function()
+    {
+        let btnSubmit = document.getElementById('btnSubmit');
+        btnSubmit.onclick = function ()
+        {
+            let txtTitle = $('#txtTitle').val();
+            let txtArticle = $('#txtArticle').val();
+            let txtAuthor = $('#txtAuthor').val();
+            if (txtTitle !== '' && txtArticle !== '') // adds change
+            {
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+                today = mm + '/' + dd + '/' + yyyy;
+                $('#blog').prepend(
+                    '<h2>' + txtTitle + '</h2>' +
+                    '<div class="col-12">' + txtArticle  + '</div>' +
+                    '<div class="text-right">' +
+                    '<small class="text-right">- by ' + txtAuthor + ', ' + today + '</small><hr></div>'
+                );
+                $('#txtTitle').val('');
+                $('#txtArticle').val('');
+                $('#txtAuthor').val('anonymous');
+            }
+            else {
+                alert("Please confirm that all fields are completed before submitting your amazing blog!");
+            }
+        }
+    });
+</script>
+<div class="container">
+    <h1 class="text-center card-header">Welcome to Simply Blogging</h1>
+    <p class="text-center">Enter your blog below to add to the blog roll!</p>
+    <form name='frmBlog' id='frmBlog'>
+        <div class="row">
+            <div class="col-6">
+                <h2 class="card-header">Current Blogs</h2>
+                <div id="blog">
+                </div>
+            </div>
+            <div class="col-6">
+                <h2 class="card-header">Submit Blog</h2>
+                <label for="txtTitle" class="">Article Title </label>
+                <input type="text" name="txtTitle" id="txtTitle" class="form-control" required>
+                <label for="txtArticle" class="">Article Text </label>
+                <textarea name="txtArticle" id="txtArticle" class="form-control"  required>This is a fascinating article about salmon fishing and setting people up to fail...</textarea>
+                <label for="txtAuthor" class="">Article Author </label>
+                <input type="text" name="txtAuthor" id="txtAuthor" class="form-control" value="anonymous" required>
+                <div class="card mt-1">
+                    <button class="btn-primary" id="btnSubmit" type="button">Submit Article</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src='js/bootstrap.bundle.min.js'></script>
+<script src='js/bootstrap.min.js'></script>
+</body>
+</html>
